@@ -3,12 +3,7 @@ import path from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    dts({
-      insertTypesEntry: true,
-    }),
-  ],
+  plugins: [react()],
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.js"),
