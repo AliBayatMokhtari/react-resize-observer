@@ -9,7 +9,7 @@
     "build": "vite build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ali Bayat Mokhtari",
   "license": "ISC",
   "devDependencies": {
     "@vitejs/plugin-react": "^2.2.0",
