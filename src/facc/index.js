@@ -38,3 +38,5 @@ function ReactResizeObserver({ children }) {
     ref,
   });
 }
+
+export default ReactResizeObserver;
