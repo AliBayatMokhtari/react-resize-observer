@@ -1,15 +1,15 @@
-import { MutableRefObject, ReactNode } from "react";
+import { LegacyRef, MutableRefObject, ReactNode, Ref } from "react";
 
 export type Dims = {
   width: number | null;
   height: number | null;
 };
 
-export type Options = {
+export type Api<TElement extends HTMLElement> = {
   dims: Dims;
-  ref: MutableRefObject<HTMLElement | null>;
+  ref: MutableRefObject<TElement | null>;
 };
 
-export type ReactResizeObserverProps = {
-  children: (options: Options) => ReactNode;
+export type ReactResizeObserverProps<TElement extends HTMLElement> = {
+  children: (api: Api<TElement>) => ReactNode;
 };

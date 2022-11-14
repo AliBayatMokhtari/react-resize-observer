@@ -1,8 +1,10 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { Dims, ReactResizeObserverProps } from "../types";
 
-function ReactResizeObserver({ children }: ReactResizeObserverProps) {
-  const ref = useRef<HTMLElement | null>(null);
+function ReactResizeObserver<TElement extends HTMLElement>({
+  children,
+}: ReactResizeObserverProps<TElement>): JSX.Element {
+  const ref = useRef<TElement | null>(null);
   const [dims, setDims] = useState<Dims>({
     width: null,
     height: null,
@@ -34,10 +36,22 @@ function ReactResizeObserver({ children }: ReactResizeObserverProps) {
     };
   }, [ref]);
 
-  return children({
-    dims,
-    ref,
-  });
+  if (!isFunction(children))
+    throw new Error("children is mandatory and needs to be a function!");
+
+  return (
+    <>
+      {children({
+        dims,
+        ref,
+      })}
+    </>
+  );
 }
 
 export default ReactResizeObserver;
+
+type IsFunction<T> = T extends (...args: any[]) => any ? T : never;
+
+const isFunction = <T extends {}>(value: T): value is IsFunction<T> =>
+  typeof value === "function";

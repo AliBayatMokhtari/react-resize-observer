@@ -1,6 +1,6 @@
 {
   "name": "resize-observer-react",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "",
   "type": "module",
   "main": "dist/index.js",

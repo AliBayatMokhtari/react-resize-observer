@@ -1,8 +1,8 @@
-import { useState, useRef, useLayoutEffect } from "react";
-import { Dims, Options } from "../types";
+import { useState, useRef, useLayoutEffect, LegacyRef } from "react";
+import { Dims, Api } from "../types";
 
-function useResizeObserver(): Options {
-  const ref = useRef<HTMLElement | null>(null);
+function useResizeObserver<TElement extends HTMLElement>(): Api<TElement> {
+  const ref = useRef<TElement | null>(null);
   const [dims, setDims] = useState<Dims>({
     width: null,
     height: null,
