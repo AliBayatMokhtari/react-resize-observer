@@ -1,13 +1,14 @@
-import { useState, useRef, useLayoutEffect, useCallback } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
+import { Dims, Options } from "../types";
 
-function useResizeObserver() {
-  const ref = useRef(null);
-  const [dims, setDims] = useState({
+function useResizeObserver(): Options {
+  const ref = useRef<HTMLElement | null>(null);
+  const [dims, setDims] = useState<Dims>({
     width: null,
     height: null,
   });
 
-  function onResize(entries) {
+  function onResize(entries: ResizeObserverEntry[]) {
     if (!Array.isArray(entries)) return;
 
     const entry = entries[0];
@@ -23,18 +24,18 @@ function useResizeObserver() {
   useLayoutEffect(() => {
     if (!ref.current) return;
 
-    let observer = new ResizeObserver(onResize);
+    let observer: ResizeObserver | null = new ResizeObserver(onResize);
 
     observer.observe(ref.current);
 
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
       observer = null;
     };
   }, [ref]);
 
   return {
-    ...dims,
+    dims,
     ref,
   };
 }
